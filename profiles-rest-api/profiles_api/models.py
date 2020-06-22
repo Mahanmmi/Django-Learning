@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, name, password=None, age=None):
+    def create_user(self, email, name, password=None, age=0):
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -18,7 +18,7 @@ class UserProfileManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, password, age=None):
+    def create_superuser(self, email, name, password, age=0):
         user = self.create_user(email, name, password, age)
         user.is_staff = True
         user.is_superuser = True
